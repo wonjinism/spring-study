@@ -14,13 +14,13 @@
 <body>
 	<h1>계산기</h1>
 	<form action="logic" id="myForm">
-		<input type="text" name="x" /><br />
+		<input type="text" name="x" value=${result}/><br />
 		<input type="text" name="y" />
 		<input type="hidden" name="logic" id="logic" /><br />
 		<button type="button" onclick="submitForm('plus')">+</button>
 		<button type="button" onclick="submitForm('minus')">-</button>
 		<button type="button" onclick="submitForm('times')">*</button>
-		<button type="button" onclick="submitForm('devide')">/</button>
+		<button type="button" onclick="submitForm('divide')">/</button>
 	</form>
 </body>
 </html>
