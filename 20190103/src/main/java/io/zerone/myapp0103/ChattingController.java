@@ -20,9 +20,9 @@ public class ChattingController {
 		model.addAttribute("messageList", messageList);
 	}
 	
-	@RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
+	@RequestMapping(value = "/sendMessage", method = RequestMethod.GET)
 	public String sendMessage(Message message, Model model) {
-		messageList.add(0, message);
+		messageList.add(message);
 		
 		for (Message msg : messageList) {
 			System.out.println(msg.toString());
