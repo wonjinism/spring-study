@@ -1,5 +1,7 @@
 package io.zerone.myapp0108;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,12 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void login() {
 	}
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+//		session.invalidate(); // session이 다 날아감
+		session.setAttribute("id", null);
+		return "home";
+	}
 	
 	@RequestMapping(value = "/joinMember", method = RequestMethod.POST)
 	public String insertMember(Member member, Model model) {
@@ -36,18 +44,24 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/loginMember", method = RequestMethod.POST)
-	public String loginMemeber(String id, String pw, Model model) {
-		Member member = new Member();
-		member.setId(id);
-		member.setPw(pw);
+	public String loginMemeber(Member member, HttpSession session, Model model) {
+		
+		System.out.println(member.getId());		
+//		제공되는 제한된 변수만 가지고도 memeber 객체를 만들어서 받을 수 있음.  
+//		Member member = new Member();
+//		member.setId(id);
+//		member.setPw(pw);
+		
 		Member loginMember = dao.loginMember(member);
 		if(loginMember != null) {
+			session.setAttribute("id", member.getId());
 			model.addAttribute("id", member.getId());
 			return "success";
 		}else {
-			model.addAttribute("id", id);
+			model.addAttribute("id", member.getId());
 			model.addAttribute("message", "잘못된 정보를 입력했습니다.");
 			return "login";
 		}
 	}
+	
 }

@@ -18,13 +18,27 @@
 			action.action = "login";
 			action.submit();
 		}
+		
+		function logout(){
+			var action = document.getElementById("mainForm");
+			action.action = "logout";
+			action.submit();
+		}
 	</script>
 </head>
 <body>
+	<c:if test="${sessionScope.id != null}">
+		<h2>${sessionScope.id}님 환영합니다.</h2>
+	</c:if>
 	<h1>Main Page</h1>
 	<form id="mainForm" action="none" method="get">
-		<input type="submit" value="Join" onclick="join()"/>
-		<input type="submit" value="Login" onclick="login()"/>
+		<c:if test="${sessionScope.id == null}">
+			<input type="submit" value="Join" onclick="join()"/>
+			<input type="submit" value="Login" onclick="login()"/>
+		</c:if>
+		<c:if test="${sessionScope.id != null}">		
+			<input type="submit" value="logout" onclick="logout()"/>
+		</c:if>
 	</form>
 </body>
 
