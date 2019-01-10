@@ -50,5 +50,7 @@
 			<input type="submit" value="logout" onclick="buttonSelect(this)"/>
 		</c:if>
 	</form>
+	<!-- <a> 태그의 href 속성 값으로도 action을 보낼 수 있음 -->
+	<a href="board">게시판 바로가기</a> 
 </body>
 </html>

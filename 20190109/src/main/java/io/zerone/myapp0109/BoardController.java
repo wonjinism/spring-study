@@ -30,6 +30,10 @@ public class BoardController {
 	
 	@RequestMapping(value = "/insertBoard", method = RequestMethod.POST)
 	public String insertBoard(Board board, HttpSession session, Model model) {
+		if(session.getAttribute("id") == null) {
+			model.addAttribute("message", "대기 상태가 오래되어 로그인이 필요합니다.");
+			return "login";
+		}
 		board.setId((String)session.getAttribute("id"));		
 		int result = dao.insertBoard(board);
 		System.out.println(board.getBoardtitle()); ////
