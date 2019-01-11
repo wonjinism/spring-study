@@ -48,6 +48,7 @@
 </head>
 <body>
 	<div id="container">
+		<!-- form 태그를 jstl로 감싸주고  action 값을 바꿔주는 방법도 있다. -->		
 		<form id="boardAction" action="insertBoard" method="post">			
 			<h2><font color="red">${message}</font></h2>
 			<table class="table table-striped table-bordered table-hover">
