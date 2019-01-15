@@ -91,6 +91,12 @@
 		)
 	</insert>
 	
+	<update id="deleteComment" parameterType="String">
+		update comments set
+			comments = '삭제된 댓글입니다.'
+		where commentseq = #{commentseq}
+	</update>
+	
 	<select id="selectComments" parameterType="String" resultType="Comment">
 		SELECT 
 			commentseq

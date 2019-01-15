@@ -110,4 +110,15 @@ public class BoardDAO {
 		}
 		return comments;
 	}
+	
+	public int deleteComment(String commentseq) {
+		BoardMapper mapper = session.getMapper(BoardMapper.class);
+		int result = 0;
+		try {
+			result = mapper.deleteComment(commentseq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

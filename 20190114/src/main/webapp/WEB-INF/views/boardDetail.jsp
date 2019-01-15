@@ -80,12 +80,21 @@
 			<input type="text" name="comments" />
 			<input type="submit" value="Leave a comment" />
 		</form> 
-		<table style="boder: 1px solid black">
+		<table class="table table-striped table-bordered table-hover">
+			<tr>
+				<td>작성자</td>
+				<td>내용</td>
+				<td>등록일</td>
+				<td>-</td>
+			</tr>
 		<c:forEach var="comments" items="${cList}">
 			<tr>
 				<td>${comments.id}</td>
 				<td>${comments.comments}</td>
 				<td>${comments.indate}</td>
+				<c:if test="${sessionScope.id == comments.id}">
+					<td><a href="deleteComment?commentseq=${comments.commentseq}&&boardseq=${board.boardseq}">삭제</a></td>
+				</c:if>
 			</tr>
 		</c:forEach>
 		</table>

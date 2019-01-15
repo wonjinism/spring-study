@@ -159,11 +159,21 @@ public class BoardController {
 		return "boardDetail";
 	}
 	
-//	@RequestMapping(value = "/selectComments", method = RequestMethod.GET)
-//	public String selectComments(String boardseq) {
-//		ArrayList<Comment>		
-//		return "boardDetail?boardseq=" + boardseq;
-//	}
+	
+	@RequestMapping(value = "/deleteComment", method = RequestMethod.GET)
+	public String deleteComment(String commentseq, String boardseq, Model model) {
+		int result = 0;
+		try {
+			result = dao.deleteComment(commentseq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Board board = dao.selectBoard(boardseq);
+		model.addAttribute("board", board);
+		selectComments(board.getBoardseq()+"", model);
+		return "boardDetail";
+	}
+	
 	
 	public void selectComments(String boardseq, Model model) {
 		ArrayList<Comment> cList = dao.selectComments(boardseq);

@@ -15,4 +15,5 @@ public interface BoardMapper {
 	
 	public int insertComment(Comment comment);
 	public ArrayList<Comment> selectComments(String boardseq);
+	public int deleteComment(String commentseq);
 }
