@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 게시판 처리 SQL -->
+<mapper namespace="kr.kfc.kiosk.DAO.MenuMapper">
+	<select id="selectMenuList" resultType="Menu">
+		SELECT
+			menu_seq
+		    , menu_type
+		    , menu_name
+		    , menu_description
+		    , original_price
+		    , promotion_price
+		    , promotion_type
+		    , release_date
+		    , image
+	    FROM
+	    	menu_info
+	</select>
+	
+	<insert id="insertMenu" parameterType="Menu">
+		INSERT INTO
+			menu_info (
+				menu_seq
+			    , menu_type
+			    , menu_name
+			    , menu_description
+			    , original_price
+			    , promotion_price
+			    , promotion_type
+			    , release_date
+			    , image
+			) VALUES (
+				menu_seq.NEXTVAL
+    			, #{menu_type}
+				, #{menu_name}
+				, #{menu_description}
+				, #{original_price}				
+				, #{promotion_price}
+				, #{promotion_type}
+    			, SYSDATE
+    			, #{image}
+			)
+	</insert>
+	
+	<update id="updateMenu" parameterType="Menu">
+		
+	</update>
+	
+	<select id="selectMenu" parameterType="int" resultType="Menu">
+		
+	</select>	
+
+</mapper>
