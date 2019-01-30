@@ -1,15 +1,25 @@
-drop table admin;
+drop table admin_info;
 drop sequence menu_seq;
 drop table menu_info;
 drop sequence customer_seq;
-drop table customer_info;
+drop table order_list;
 drop sequence order_seq;
 drop table order_info;
 
-CREATE TABLE admin (
-admin_id VARCHAR2(20)
-, admin_pw VARCHAR2(20)
+CREATE TABLE admin_info (
+account VARCHAR2(20)
+, password VARCHAR2(20)
 , admin_level NUMBER(1)
+);
+
+INSERT INTO admin_info (
+account
+, password
+, admin_level
+) VALUES (
+'admin'
+, 'admin'
+, 1
 );
 
 CREATE SEQUENCE menu_seq
@@ -30,11 +40,14 @@ menu_seq NUMBER
 CREATE SEQUENCE customer_seq
 NOCACHE;
 
-CREATE TABLE customer (
+CREATE TABLE order_list (
 customer_seq NUMBER
-, menu_id NUMBER
+, menu_seq NUMBER
 , quantity NUMBER
 );
+
+CREATE SEQUENCE order_seq
+NOCACHE;
 
 CREATE TABLE order_info (
 order_seq NUMBER
@@ -72,10 +85,4 @@ INSERT INTO menu_info (menu_seq, menu_type, menu_name, menu_description, origina
 INSERT INTO menu_info (menu_seq, menu_type, menu_name, menu_description, original_price, promotion_price, promotion_type, release_date, image) VALUES (menu_seq.NEXTVAL, 1,'오리지널치킨4조각', 'KFC만의 11가지 비밀양념, 고압쿠킹 방식으로 육즙이 살아있어 촉촉...', 9600, 9600, 7, sysdate, 'https://www.mpps.co.kr/kfcs_api_img/KFCS/goods/DL_2172967_20181218163507121.png');
 INSERT INTO menu_info (menu_seq, menu_type, menu_name, menu_description, original_price, promotion_price, promotion_type, release_date, image) VALUES (menu_seq.NEXTVAL, 1,'오리지널치킨1조각', '★치킨나이트는 밤9시 이후 적용가능(장바구니담기기준) *스위트칠리소...', 2700, 2700, 7, sysdate, 'https://www.mpps.co.kr/kfcs_api_img/KFCS/goods/DL_1171238_20181218164601526.png');
 
-
-
-
 commit;
-
-select * from menu_info;
-

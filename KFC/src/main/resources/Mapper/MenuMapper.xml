@@ -45,12 +45,36 @@
 			)
 	</insert>
 	
+	<select id="selectMenu" parameterType="int" resultType="Menu">
+		SELECT
+			menu_seq
+		    , menu_type
+		    , menu_name
+		    , menu_description
+		    , original_price
+		    , promotion_price
+		    , promotion_type
+		    , release_date
+		    , image
+	    FROM
+	    	menu_info
+    	WHERE
+    		menu_seq = #{menu_seq}
+	</select>	
+
 	<update id="updateMenu" parameterType="Menu">
-		
+		UPDATE menu_info
+		SET
+			promotion_price = #{promotion_price}
+		    , promotion_type = #{promotion_type}
+    	WHERE
+    		menu_seq = #{menu_seq}
 	</update>
 	
-	<select id="selectMenu" parameterType="int" resultType="Menu">
-		
-	</select>	
+	<delete id="deleteMenu" parameterType="int">
+		DELETE menu_info
+		WHERE
+			menu_seq = #{menu_seq}
+	</delete>
 
 </mapper>

@@ -26,15 +26,43 @@ public class MenuDAO {
 		return menuList;
 	}
 
-	public Menu selectMenu(int menu_id){
+	public Menu selectMenu(int menu_seq){
 		MenuMapper mapper = session.getMapper(MenuMapper.class);
 		Menu menu = null;
 		try {
-			menu = mapper.selectMenu(menu_id);
+			menu = mapper.selectMenu(menu_seq);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return menu;
 		}
 		return menu;
+	}
+	
+	public void updateMenu(Menu menu){
+		MenuMapper mapper = session.getMapper(MenuMapper.class);
+		int result = 0;
+		try {
+			result = mapper.updateMenu(menu);
+			if(result == 0) {
+				System.out.println("DB 업데이트 오류");
+				return;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteMenu(int menu_seq){
+		MenuMapper mapper = session.getMapper(MenuMapper.class);
+		int result = 0;
+		try {
+			result = mapper.deleteMenu(menu_seq);
+			if(result == 0) {
+				System.out.println("DB 업데이트 오류");
+				return;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -20,21 +20,48 @@ public class MenuController {
 	MenuDAO dao;
 	
 	@RequestMapping(value = "/selectMenuList", method = RequestMethod.GET)
-	public String selectMenuList(@RequestParam(defaultValue="consumer") String jsp, Model model) {
+	public String selectMenuList(@RequestParam(defaultValue="customer") String page, 
+			@RequestParam(defaultValue="") String message, 
+			@RequestParam(defaultValue="") String cart_count,
+			Model model) {
 		ArrayList<Menu> menuList = dao.selectMenuList();
 		model.addAttribute("menuList", menuList);
-		return jsp;
-	}	
-
+		System.out.println(message); ////
+		
+		if(!(message.equals(""))) {
+			model.addAttribute("message", message);
+		}
+		if(!(message.equals(""))) {
+			model.addAttribute("cart_count", cart_count);
+		}
+		return page;
+	}
+	
 	@RequestMapping(value = "/addMenu", method = RequestMethod.GET)
 	public String addMenu(Menu menu, RedirectAttributes ra) {
-		ra.addAttribute("jsp", "admin");
+		ra.addAttribute("page", "admin_editor");
 		return "redirect:/selectMenuList";
+	}
+	
+	@RequestMapping(value = "/editMenu", method = RequestMethod.GET)
+	public String editMenu(int menu_seq, Model model) {
+		Menu menu = dao.selectMenu(menu_seq);
+		model.addAttribute("menu", menu);
+		model.addAttribute("status", "edit");
+		return "admin_editor";
 	}
 	
 	@RequestMapping(value = "/updateMenu", method = RequestMethod.GET)
 	public String updateMenu(Menu menu, RedirectAttributes ra) {
-		ra.addAttribute("jsp", "admin");
+		dao.updateMenu(menu);
+		ra.addAttribute("page", "admin");
+		return "redirect:/selectMenuList";
+	}
+	
+	@RequestMapping(value = "/deleteMenu", method = RequestMethod.GET)
+	public String updateMenu(int menu_seq, RedirectAttributes ra) {
+		dao.deleteMenu(menu_seq);
+		ra.addAttribute("page", "admin");
 		return "redirect:/selectMenuList";
 	}
 	
@@ -44,19 +71,15 @@ public class MenuController {
 		
 //		return "detail";
 		return "redirect:/selectMenuList";
-	}	
-	
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String search(String search, String jsp) {
-		
-		return jsp;
-	}
-
+	}		
 
 	
-	
-//	updateMenu(Menu menu)
-//	
-//	페이징 기능 있음 (우선순위 낮음)
-//	searchMenuList(String search, String jsp)
+//	@RequestMapping(value = "/search", method = RequestMethod.GET)
+//	public String search(String search, String page) {
+//		
+//		return page;
+//	}
+
+	//	페이징 기능 있음 (우선순위 낮음)
+//	searchMenuList(String search, String page)
 }

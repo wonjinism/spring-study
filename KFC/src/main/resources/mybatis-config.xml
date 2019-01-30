@@ -5,8 +5,11 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="kr.kfc.kiosk.VO.Menu" alias="Menu" />
+		<typeAlias type="kr.kfc.kiosk.VO.Menu" alias="Order" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="Mapper/MenuMapper.xml" />
+		<mapper resource="Mapper/OrderMapper.xml" />
+		<mapper resource="Mapper/AdminMapper.xml" />
 	</mappers>
 </configuration>
