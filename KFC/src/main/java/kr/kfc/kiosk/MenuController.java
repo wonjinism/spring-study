@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.kfc.kiosk.DAO.MenuDAO;
 import kr.kfc.kiosk.VO.Menu;
+import kr.kfc.kiosk.util.PageNavigator;
 
 @Controller
 public class MenuController {
@@ -19,11 +20,21 @@ public class MenuController {
 	@Autowired
 	MenuDAO dao;
 	
+	private final int pagePerGroup = 3;
+	private final int postPerPage = 3;
+	
 	@RequestMapping(value = "/selectMenuList", method = RequestMethod.GET)
-	public String selectMenuList(@RequestParam(defaultValue="customer") String page, 
+	public String selectMenuList(
+			@RequestParam(defaultValue="") String search,
+			@RequestParam(defaultValue="1") int currentPage,
+			@RequestParam(defaultValue="customer") String page, 
 			@RequestParam(defaultValue="") String message, 
 			@RequestParam(defaultValue="") String cart_count,
 			Model model) {
+		
+		int totalPage = dao.totalCount(currentPage); //// 
+		PageNavigator pn = new PageNavigator(postPerPage, currentPage, currentPage, totalPage)
+		
 		ArrayList<Menu> menuList = dao.selectMenuList();
 		model.addAttribute("menuList", menuList);
 		System.out.println(message); ////

@@ -18,6 +18,20 @@
 		    , image
 	    FROM
 	    	menu_info
+	    <if test="#{value} != null">
+	    WHERE 
+	    	menu_name LIKE '%' ||#{value}|| '%'
+	    </if>
+	</select>
+	<select id="totalCount" resultType="int" parameterType="String">
+		SELECT
+			COUNT(menu_seq)
+		FROM
+			menu_info
+		<if test="#{value} != null">
+	    WHERE 
+	    	menu_name LIKE '%' ||#{value}|| '%'
+	    </if>
 	</select>
 	
 	<insert id="insertMenu" parameterType="Menu">

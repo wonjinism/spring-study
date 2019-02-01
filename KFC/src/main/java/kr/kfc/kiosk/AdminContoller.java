@@ -19,7 +19,7 @@ public class AdminContoller {
 	@Autowired
 	AdminDAO dao;
 	
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String login(@RequestParam(defaultValue="1") String access, String account, Model model) {
 		if(access.equals("0")) {
 			model.addAttribute("message", "계정명을 확인해주세요!");

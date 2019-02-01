@@ -2,11 +2,13 @@ package kr.kfc.kiosk.DAO;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.kfc.kiosk.VO.Menu;
+import kr.kfc.kiosk.util.PageNavigator;
 
 @Repository
 public class MenuDAO {
@@ -19,6 +21,20 @@ public class MenuDAO {
 		ArrayList<Menu> menuList = null;
 		try {
 			menuList = mapper.selectMenuList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return menuList;
+		}
+		return menuList;
+	}
+	
+	public ArrayList<Menu> selectMenuList(String search, PageNavigator pn){
+		ArrayList<Menu> menuList = null;
+		MenuMapper mapper = session.getMapper(MenuMapper.class);
+		RowBounds rb = new RowBounds(pn.getStartPageInGroup(), pn.getPostPerPage());
+		
+		try {
+			menuList = mapper.selectMenuList(pn, rb);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return menuList;
@@ -64,5 +80,11 @@ public class MenuDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int totalCount(int currentPage){
+		MenuMapper mapper = session.getMapper(MenuMapper.class);
+		int result = 0;
+		return result;
 	}
 }
