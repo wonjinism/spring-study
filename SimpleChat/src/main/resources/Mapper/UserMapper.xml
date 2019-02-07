@@ -4,17 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 게시판 처리 SQL -->
-<mapper namespace="io.zerone.simplechat.UserMapper">
+<mapper namespace="io.zerone.simplechat.DAO.UserMapper">
 
 	<insert id="insertUser" parameterType="User">
-		INSERT INTO USER_INFO (
+		INSERT INTO user_info (
 			USER_SEQ
 			, USER_ID
 			, USER_PASSWORD
 			, USER_REGDATE
 			, USER_LEVEL
 		) VALUES (
-			 USER_SEQ.NEXVAL
+			 user_seq.nextval
 			, #{user_id}
 			, #{user_password}
 			, SYSDATE

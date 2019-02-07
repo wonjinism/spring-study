@@ -1,25 +1,52 @@
-DROP TABLE CHAT;
-DROP TABLE ROOM;
-DROP SEQUENCE ROOM_SEQ;
-DROP SEQUENCE CHAT_SEQ;
+DROP TABLE chat;
+DROP TABLE room;
+DROP TABLE user_info;
+DROP SEQUENCE room_seq;
+DROP SEQUENCE chat_seq;
+DROP SEQUENCE user_seq;
 
-CREATE SEQUENCE ROOM_SEQ;
-CREATE SEQUENCE CHAT_SEQ;
+CREATE SEQUENCE room_seq;
+CREATE SEQUENCE chat_seq;
+CREATE SEQUENCE user_seq;
 
-CREATE TABLE ROOM (
-	ROOM_SEQ NUMBER	PRIMARY KEY
-    , USER_ID VARCHAR(20) REFERENCES USER_INFO
+CREATE TABLE user_info (
+user_seq NUMBER
+, user_id VARCHAR2(20) PRIMARY KEY
+, user_password VARCHAR(20)
+, user_regdate DATE
+, user_level NUMBER(1) DEFAULT 1
+);
+
+CREATE TABLE room (
+	room_seq NUMBER	PRIMARY KEY
+    , user_id VARCHAR(20) REFERENCES user_info
 	, NAME VARCHAR(200)
-	, INDATE DATE
-    , USER_COUNT NUMBER
+	, indate DATE
+    , user_count NUMBER default 0
 );
 
-CREATE TABLE CHAT (
-	CHAT_SEQ NUMBER PRIMARY KEY
-	, ROOM_SEQ	 NUMBER REFERENCES ROOM
-    , USER_ID VARCHAR(20)
-    , MESSAGE VARCHAR(1000)
-    , INDATE DATE
+CREATE TABLE chat (
+	chat_seq NUMBER PRIMARY KEY
+	, room_seq	 NUMBER REFERENCES room
+    , user_id VARCHAR(20)
+    , message VARCHAR(1000)
+    , indate DATE
 );
 
-SELECT * FROM USER_INFO;
+INSERT INTO user_info (
+	USER_SEQ
+	, USER_ID
+	, USER_PASSWORD
+    , USER_REGDATE
+    , USER_LEVEL
+) VALUES (
+     user_seq.nextval
+	, 'admin'
+	, 'admin'
+	, SYSDATE
+	, 0
+);
+
+commit;
+
+SELECT * FROM user_info;

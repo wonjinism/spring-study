@@ -4,8 +4,61 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 게시판 처리 SQL -->
-<mapper namespace="io.zerone.simplechat.ChatMapper">
+<mapper namespace="io.zerone.simplechat.DAO.ChatMapper">
+	<select id="selectRoomList" resultType="Room">
+		select 
+			room_seq
+			, user_id
+			, name
+			, indate
+			, user_count
+		from
+			room_info
+		order by
+			user_count, indate
+	</select>
 	
+	<insert id="insertRoom" parameterType="Room">
+		insert into room (
+			room_seq
+    		, user_id
+			, NAME
+			, indate
+		) values (
+			room_seq.nextval
+			, #{user_id}
+			, #{name}
+			, sysdate
+		)
+		<selectKey keyProperty="room_seq" resultType="int">
+			select room_seq.curval
+			from dual
+		</selectKey>
+		<selectKey keyProperty="indate" resultType="String">
+			select indate
+			from room
+			where room_seq = room_seq.curval
+		</selectKey>
+	</insert>
 	
+	<select id="selectRoom" parameterType="int" resultType="Room">
+		select
+			room_seq
+    		, user_id
+			, NAME
+			, indate
+		from 
+			room
+		where room_seq = ${room_seq}
+	</select>
+	
+	<insert id="insertChat" parameterType="Chat">
+		
+	</insert>
+	
+	<select id="selectChatList" parameterType="room_seq" resultType="Chat">
+		select
+			
+	</select>
 
 </mapper>

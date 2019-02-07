@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="io.zerone.simplechat" alias="User" />
-		<typeAlias type="io.zerone.simplechat" alias="Room" />
-		<typeAlias type="io.zerone.simplechat" alias="Chat" />
+		<typeAlias type="io.zerone.simplechat.VO.User" alias="User" />
+		<typeAlias type="io.zerone.simplechat.VO.Room" alias="Room" />
+		<typeAlias type="io.zerone.simplechat.VO.Chat" alias="Chat" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="Mapper/ChatMapper.xml" />

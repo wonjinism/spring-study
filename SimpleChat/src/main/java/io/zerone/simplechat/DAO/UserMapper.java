@@ -1,5 +1,8 @@
 package io.zerone.simplechat.DAO;
 
-public interface UserMapper {
+import io.zerone.simplechat.VO.User;
 
+public interface UserMapper {
+	public int insertUser(User user);
+	public User selectUser(User user);
 }
