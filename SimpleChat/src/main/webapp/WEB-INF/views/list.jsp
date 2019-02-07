@@ -8,28 +8,29 @@
 <body>
 	<h1>채팅 리스트</h1>
 	<form action="createRoom" method="get">
-		<input text="text" name="name" placeholder="방 이름"/>
+		<input type="text" name="name" placeholder="방 이름"/>
 		<button>채팅방 만들기</button>
 	</form>
-	<c:if test="${chatList != null}">
+	<c:if test="${roomList != null}">
 	<table>
 		<tr>
 			<th>생성자</th>
 			<th>채팅방 이름</th>
 			<th>참가자 수</th>
-			<th>생성일시</th>
+			<th colspan="2">생성일시</th>
 		</tr>
-		<c:forEach var="chat" items="${chatList}">
+		<c:forEach var="room" items="${roomList}">
 			<tr>
-				<td>${chat.user_id}</td>
-				<td>${chat.name}</td>
-				<td>${chat.user_count}</td>
-				<td>${chat.indate}</td>
+				<td>${room.user_id}</td>
+				<td>${room.name}</td>
+				<td>${room.user_count}</td>
+				<td>${room.indate}</td>
+				<td><a href="chat?chatNum=${room.room_seq}">입장하기</a></td>
 			</tr>
 		</c:forEach>
 	</table>
 	</c:if>
-	<c:if test="${chatList == null}">
+	<c:if test="${roomList == null}">
 	<h3>생성된 채팅방이 없습니다.</h3>
 	</c:if>
 </body>

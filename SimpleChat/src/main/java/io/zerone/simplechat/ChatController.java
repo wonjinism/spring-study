@@ -20,42 +20,39 @@ public class ChatController {
 	@Autowired
 	ChatDAO dao;
 
-	@RequestMapping(value = "/listRoom", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listRoom(Model model) {
 		ArrayList<Room> roomList = null;
 		roomList = dao.selectRoomList();
+		System.out.println(roomList); //// 
 		model.addAttribute("roomList", roomList);
 		return "list";
 	}
 
 	@RequestMapping(value = "/createRoom", method = RequestMethod.GET)
 	public String createRoom(Room room, HttpSession session) {
-		
-		room.setUser_id("admin");
-//		String user_id = (String) session.getAttribute("user_id");
-		
+		String user_id = (String) session.getAttribute("user_id");
+		room.setUser_id(user_id);
 		dao.insertRoom(room);
-		
+		// ½ÃÄö½º ¹øÈ£¸¦ ¹Þ¾Æ¿È
 		return "redirect:/chat?chatNum=" + room.getRoom_seq();
 	}
 
 	
 	@RequestMapping(value = "/chat", method = RequestMethod.GET)
-	public String chat(int chatNum) {
-		
+	public String chat(int chatNum, Model model) {
 		Room room = dao.selectRoom(chatNum);
+		model.addAttribute("room", room);
 		ArrayList<Chat> chatList = dao.selectChatList(chatNum);
-		
-		
+		model.addAttribute("chatList", chatList);
 		return "chat";
 	}
 	
 	@RequestMapping(value = "/message", method = RequestMethod.POST)
-	public String message(Chat chat) {
-		
-		dao.insertChat()
-		
-		return "redirect:/chat";
+	public String message(Chat chat, HttpSession session) {
+		String user_id = (String) session.getAttribute("user_id");
+		chat.setUser_id(user_id);
+		dao.insertChat(chat);
+		return "redirect:/chat?chatNum=" + chat.getRoom_seq();
 	}
-	
 }

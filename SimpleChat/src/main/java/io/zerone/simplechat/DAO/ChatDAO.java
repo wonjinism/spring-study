@@ -30,7 +30,6 @@ public class ChatDAO {
 	public int insertRoom(Room room) {
 		int result = 0;
 		ChatMapper mapper = session.getMapper(ChatMapper.class);
-		
 		try {
 			mapper.insertRoom(room);
 		} catch (Exception e) {
@@ -64,6 +63,18 @@ public class ChatDAO {
 			return result;
 		}
 		return result;
+	}
+	
+	public ArrayList<Chat> selectChatList(int room_seq){
+		ArrayList<Chat> chatList = null;
+		ChatMapper mapper = session.getMapper(ChatMapper.class);
+		try {
+			chatList = mapper.selectChatList(room_seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return chatList;
+		}
+		return chatList;
 	}
 	
 }

@@ -13,7 +13,7 @@
 			, indate
 			, user_count
 		from
-			room_info
+			room
 		order by
 			user_count, indate
 	</select>
@@ -30,14 +30,9 @@
 			, #{name}
 			, sysdate
 		)
-		<selectKey keyProperty="room_seq" resultType="int">
-			select room_seq.curval
+		<selectKey keyProperty="room_seq" resultType="int" order="AFTER">
+			select room_seq.currval
 			from dual
-		</selectKey>
-		<selectKey keyProperty="indate" resultType="String">
-			select indate
-			from room
-			where room_seq = room_seq.curval
 		</selectKey>
 	</insert>
 	
@@ -49,16 +44,38 @@
 			, indate
 		from 
 			room
-		where room_seq = ${room_seq}
+		where room_seq = ${value}
 	</select>
 	
 	<insert id="insertChat" parameterType="Chat">
-		
+		insert into chat (
+			chat_seq
+			, room_seq
+			, user_id
+			, message
+			, indate		 
+		) values (
+			chat_seq.nextval
+			, #{room_seq}
+			, #{user_id}
+			, #{message}
+			, sysdate		
+		)
 	</insert>
 	
-	<select id="selectChatList" parameterType="room_seq" resultType="Chat">
-		select
-			
+	<select id="selectChatList" parameterType="int" resultType="Chat">
+		select 
+			chat_seq
+			, room_seq
+			, user_id
+			, message
+			, indate
+		from
+			chat
+		where
+			room_seq = #{room_seq}
+		order by 
+			indate desc			
 	</select>
 
 </mapper>
