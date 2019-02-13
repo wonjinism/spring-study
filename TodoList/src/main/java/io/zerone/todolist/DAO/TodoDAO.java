@@ -49,16 +49,4 @@ public class TodoDAO {
 		}
 		return result;
 	}
-	
-	public int deleteTodo(Todo todo) {
-		TodoMapper mapper = session.getMapper(TodoMapper.class);
-		int result = 0;
-		try {
-			result = mapper.deleteTodo(todo);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return result;
-		}
-		return result;
-	}
 }

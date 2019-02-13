@@ -1,3 +1,6 @@
+drop sequence todoSeq;
+drop table todo;
+
 CREATE SEQUENCE todoSeq;
 
 CREATE TABLE todo (
@@ -8,3 +11,7 @@ seq NUMBER(1) NOT NULL,
 type VARCHAR2(20) DEFAULT 'TODO',
 regdate DATE DEFAULT SYSDATE
 );
+
+commit;
+
+select * from todo;

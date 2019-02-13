@@ -8,5 +8,4 @@ public interface TodoMapper {
 	public ArrayList<Todo> selectTodoList();
 	public int insertTodo(Todo todo);
 	public int updateTodo(Todo todo);
-	public int deleteTodo(Todo todo);
 }
