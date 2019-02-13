@@ -16,36 +16,36 @@ public class UserController {
 
 	@Autowired
 	UserDAO dao;
-	
+
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
 	public String signUp(User user, Model model) {
 		User checkUser = dao.selectUser(user);
-		if(checkUser == null) {
+		if (checkUser == null) {
 			dao.insertUser(user);
 			model.addAttribute("user_id", user.getUser_id());
-			model.addAttribute("warning", "È¸¿ø °¡ÀÔÀÌ ¿Ï·áµÆ½À´Ï´Ù.");
+			model.addAttribute("warning", "íšŒì› ê°€ì…ì´ ì™„ë£ŒëìŠµë‹ˆë‹¤.");
 			return "home";
-		}else {
+		} else {
 			model.addAttribute("user_id", user.getUser_id());
-			model.addAttribute("warning", "ÀÌ¹Ì °¡ÀÔµÈ °èÁ¤ÀÔ´Ï´Ù.");
+			model.addAttribute("warning", "ì´ë¯¸ ê°€ì…ëœ ê³„ì •ì…ë‹ˆë‹¤.");
 			return "join";
 		}
 	}
-	
+
 	@RequestMapping(value = "/signIn", method = RequestMethod.POST)
 	public String signIn(User user, Model model, HttpSession session) {
 		User checkUser = dao.selectUser(user);
-		if(checkUser == null) {
-			model.addAttribute("warning", "°¡ÀÔÇÏÁö ¾ÊÀº IDÀÔ´Ï´Ù.");
+		if (checkUser == null) {
+			model.addAttribute("warning", "ê°€ì…í•˜ì§€ ì•Šì€ IDì…ë‹ˆë‹¤.");
 			model.addAttribute("user_id", user.getUser_id());
 			return "home";
-		}else if(checkUser.getUser_password().equals(user.getUser_password())) {
-			System.out.println("·Î±×ÀÎ ¼º°ø! " + checkUser); //// 
+		} else if (checkUser.getUser_password().equals(user.getUser_password())) {
+			System.out.println("ë¡œê·¸ì¸ ì„±ê³µ! " + checkUser); ////
 			session.setAttribute("user_id", user.getUser_id());
-			System.out.println(user.getUser_id() + " ¼¼¼Ç ÀúÀå"); //// 
+			System.out.println(user.getUser_id() + " ì„¸ì…˜ ì €ì¥"); ////
 			return "redirect:/list";
-		}else {
-			model.addAttribute("warning", "ºñ¹Ğ ¹øÈ£¸¦ È®ÀÎÇØ ÁÖ¼¼¿ä.");
+		} else {
+			model.addAttribute("warning", "ë¹„ë°€ ë²ˆí˜¸ë¥¼ í™•ì¸í•´ ì£¼ì„¸ìš”.");
 			model.addAttribute("user_id", user.getUser_id());
 			return "home";
 		}

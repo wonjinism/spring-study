@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.zerone</groupId>
-	<artifactId>simplechat</artifactId>
-	<name>SimpleChat</name>
+	<artifactId>todolist</artifactId>
+	<name>TodoList</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -124,9 +124,9 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>  
+		</dependency>     
 		
-				<!-- mybatis -->		
+		<!-- mybatis -->		
 		<dependency>
 		    <groupId>org.mybatis</groupId>
 		    <artifactId>mybatis</artifactId>
@@ -152,22 +152,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
-		</dependency>
-		
-		<!-- //클라이언트가 요청할때->JAVA객체 -->
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.1.1</version>
-		</dependency>
-		
-		<!-- 객체로 응답할때 ->JSON객체 -->
-		<dependency>
-		 	<groupId>org.codehaus.jackson</groupId> 
-			<artifactId>jackson-mapper-asl</artifactId> 
-			<version>1.9.13</version> 
-		</dependency>
-		      
+		</dependency>   
 	</dependencies>
     <build>
         <plugins>
