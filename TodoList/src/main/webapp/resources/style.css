@@ -79,7 +79,12 @@ section{
     width: 85%;
     margin: 5%;
     padding: 5%;
-    height: 100%;
+    height: auto;
+}
+
+.todo_wrap {
+	width: 100%;
+	height: auto;
 }
 
 .todo_title{
@@ -91,7 +96,7 @@ section{
     margin-top: 10px;
     margin-right: 30px;
     color: #75878A;
-    height: 100%;
+    height: auto;
 }
 .todo_info span{
     float: left;
@@ -139,7 +144,7 @@ section{
     margin-right: 20px;
 }
 
-.btn_list{
+.btn_wrap {
     margin-top: 30px;
     display: inline-block;
     width: 100%;
@@ -154,13 +159,14 @@ section{
     font-size: 1.1rem;
     line-height: 1.8rem;
     box-sizing: border-box;
+	margin-bottom: 10px;
 }
 
 .btn_prev > a{
 	display: block;
 	color: #000;
 	width: 100%;
-	height: 100%;
+	height: auto;
 }
 
 .btn_form{
@@ -172,6 +178,7 @@ section{
     padding: 0;
     text-align: center;
     margin-left: 10px;
+    margin-bottom: 10px;
 }
 
 .btn_form button{

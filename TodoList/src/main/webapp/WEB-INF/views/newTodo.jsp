@@ -28,13 +28,15 @@
                     <label class="seq"><input type="radio" name="seq" value="3">3순위</label>
                 </li>
             </ul>
-            <ul class="btn_left">
-                <li class="btn_prev"><a href="/todolist">&lt;&nbsp;이전</a></li>
-            </ul>
-            <ul class="btn_right">
-                <li class="btn_form btn_reset"><button onclick="">내용지우기</button></li>
-                <li class="btn_form btn_submit"><button>제출</button></li>
-            </ul>
+            <div class="btn_wrap">
+	            <ul class="btn_left">
+	                <li class="btn_prev"><a href="/todolist">&lt;&nbsp;이전</a></li>
+	            </ul>
+	            <ul class="btn_right">
+	                <li class="btn_form btn_reset"><button onclick="">내용지우기</button></li>
+	                <li class="btn_form btn_submit"><button>제출</button></li>
+	            </ul>
+            </div>
         </form>
     </div>
 </body>
