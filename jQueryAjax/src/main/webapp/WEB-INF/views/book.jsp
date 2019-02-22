@@ -45,6 +45,17 @@ $(function(){
 //모든 데이터 읽어옴
 function init() {
 	// Code Here
+	$.ajax({
+		url: 'reviewList',
+		type: 'get',
+		success: function(result){
+			if(result != ""){
+				output(result);
+			}else{
+				$('#reviewDiv').html('');
+			}
+		}
+	});
 }
 
 // 서평 등록 
@@ -63,7 +74,16 @@ function regist(){
 	}
 
 	$.ajax({
-		// Code Here
+		url: 'reviewWrite',
+		data: reviewData,
+		type: 'get',
+		success: function(result){
+			if(result != 0){
+				init();
+			}else{
+				alert('등록에 실패했습니다. 관리자에게 문의하세요');
+			}
+		}
 	});
 }
 
@@ -80,6 +100,8 @@ function output(resp) {
 		data += '</tr>';
 	});
 	// Code Here
+	$('#reviewDiv').html(data);
+	$('.delbtn').on('click', del);
 }
 
 // 서평 삭제
@@ -87,6 +109,16 @@ function del() {
 	var delno = $(this).attr('data-sno');
 	$.ajax({
 		//Code Here
+		url: 'reviewDelete',
+		data: {seq : delno},
+		type: 'get',
+		success: function(result){
+			if(result != 0){
+				init();
+			}else{
+				alert('삭제에 실패했습니다. 관리자에게 문의하세요');
+			}
+		}
 	});
 }
 </script>

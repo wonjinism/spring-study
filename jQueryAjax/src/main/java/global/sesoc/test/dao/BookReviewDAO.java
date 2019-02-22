@@ -1,5 +1,6 @@
 package global.sesoc.test.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,16 +21,38 @@ public class BookReviewDAO {
 
 	public List<BookReview> reviewList() {
 		//
-		return null;
+		ArrayList<BookReview> reviewList = null;
+		BookReviewMapper mapper = session.getMapper(BookReviewMapper.class);
+		try {
+			reviewList = (ArrayList<BookReview>) mapper.reviewList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return reviewList;
+		}
+		return reviewList;
 	}
 	public int reviewWrite(BookReview bookReview) {
 		//
-		return 0;
-
+		int result = 0;
+		BookReviewMapper mapper = session.getMapper(BookReviewMapper.class);
+		try {
+			result = mapper.reviewWrite(bookReview);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
 	}
 	public int reviewDelete(int seq) {
 		//
-		
-		return 0;
+		int result = 0;
+		BookReviewMapper mapper = session.getMapper(BookReviewMapper.class);
+		try {
+			result = mapper.reviewDelete(seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
 	}
 }
