@@ -8,10 +8,30 @@
     <link rel="stylesheet" type="text/css" href="resources/style.css">
     <script>
     	var root = "http://localhost:8888/todolist/";
-    	function moveTodo(tag){
-    		var id = tag.nextElementSibling.value;
-    		var type = tag.previousElementSibling.value;
-    		window.location.href = root + "moveTodo?id=" + id + "&type=" + type;
+    	function moveTodo(tag, id, type){
+    		
+    		$.ajax({
+    			url: moveTodo,
+    			data: {
+    				id: id,
+    				type: type
+    				},
+    			type: "post",
+    			success: function(returnData){
+    				if(returnData == "success"){
+    					
+    				}
+    			}
+    		});
+    		
+    		"moveTodo(this, " + id + ", 'DOING')";
+    		
+    		var todo = tag.parentElement;
+    		tag.parentNode.remove(tag);
+    		if(type == 'TODO'){
+    			document.getElementById("doing").childElement.append();
+    		}
+//     		window.location.href = root + "moveTodo?id=" + id + "&type=" + type;
     	}
     </script> 
     <title>TODO 리스트</title>
@@ -36,9 +56,7 @@
 		                        <span>우선순위 ${todo.seq}</span>
 		                    </span>
 		                </div>
-		                <input type="hidden" value="${todo.type}">
-		                <button class="btn btn_move" onclick="moveTodo(this)">→</button>
-		                <input type="hidden" value="${todo.id}">
+		                <button class="btn btn_move" onclick="moveTodo(this, ${todo.id}, '${todo.type}')">→</button>
 		            </div>
 	            </c:if>
             </c:forEach>
@@ -56,9 +74,7 @@
 		                        <span>우선순위 ${todo.seq}</span>
 		                    </span>
 		                </div>
-		                <input type="hidden" value="${todo.type}">
-		                <button class="btn btn_move" onclick="moveTodo(this)">→</button>
-		                <input type="hidden" value="${todo.id}">
+   		                <button class="btn btn_move" onclick="moveTodo(this, ${todo.id}, '${todo.type}')">→</button>
 		            </div>
 	            </c:if>
             </c:forEach>
@@ -76,9 +92,7 @@
 		                        <span>우선순위 ${todo.seq}</span>
 		                    </span>
 		                </div>
-		                <input type="hidden" value="${todo.type}">
-		                <button class="btn btn_move" onclick="moveTodo(this)">X</button>
-		                <input type="hidden" value="${todo.id}">
+		                <button class="btn btn_move" onclick="moveTodo(${todo.id}, '${todo.type}')">→</button>
 		            </div>
 	            </c:if>
             </c:forEach>

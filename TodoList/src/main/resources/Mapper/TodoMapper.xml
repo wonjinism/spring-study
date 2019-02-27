@@ -34,7 +34,7 @@
 		from
 			todo
 		order by
-			seq desc, regdate asc
+			seq asc, id desc
 	</select>
 	
 	<update id="updateTodo" parameterType="Todo">
