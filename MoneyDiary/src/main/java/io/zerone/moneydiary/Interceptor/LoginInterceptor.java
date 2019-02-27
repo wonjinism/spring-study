@@ -18,6 +18,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		if(id != null) {
 			return true;
 		}else {
+			response.sendRedirect(request.getContextPath());
 			return false;
 		}
 	}
