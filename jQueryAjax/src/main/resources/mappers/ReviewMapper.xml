@@ -17,13 +17,18 @@
 			, #{review}
 		)
 	</insert>
-	<select id="reviewList" resultType="BookReview">
+	<select id="reviewList" resultType="BookReview" parameterType="String">
 		select
 			seq
 			, name
 			, to_char(regdate, 'YYYY/MM/DD') as "regdate"
 			, review
 		from bookreview
+		<if test="search != null">
+			where name like '%'||#{search}||'%'
+			or
+			review like '%'||#{search}||'%'
+		</if>
 		order by seq desc
 	</select>
 	<delete id="reviewDelete" parameterType="int">

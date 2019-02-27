@@ -31,6 +31,21 @@ public class BookReviewDAO {
 		}
 		return reviewList;
 	}
+	
+	public List<BookReview> reviewSearchList(String search) {
+		//
+		ArrayList<BookReview> reviewList = null;
+		BookReviewMapper mapper = session.getMapper(BookReviewMapper.class);
+		try {
+			reviewList = (ArrayList<BookReview>) mapper.reviewList(search);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return reviewList;
+		}
+		return reviewList;
+	}
+	
+	
 	public int reviewWrite(BookReview bookReview) {
 		//
 		int result = 0;

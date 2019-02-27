@@ -34,8 +34,14 @@ public class BookReviewController {
 	}
 
 	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
-	public @ResponseBody ArrayList<BookReview> reviewList(BookReview bookReview){
+	public @ResponseBody ArrayList<BookReview> reviewList(){
 		ArrayList<BookReview> reviewList = (ArrayList<BookReview>) dao.reviewList();
+		return reviewList;
+	}
+	
+	@RequestMapping(value = "/reviewSearchList", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<BookReview> reviewSearchList(String search){
+		ArrayList<BookReview> reviewList = (ArrayList<BookReview>) dao.reviewSearchList(search);
 		return reviewList;
 	}
 }

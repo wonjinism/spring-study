@@ -96,11 +96,13 @@ function output(resp) {
 		data += '	<td class="name">' + item.name + '</td>';
 		data += '	<td class="regdate">' + item.regdate + '</td>';
 		data += '	<td class="review">' + item.review + '</td>';
+		data += '	<td><input type="button" class="udpbtn" data-sno="'+item.seq +'"value="수정" /></td>';
 		data += '	<td><input type="button" class="delbtn" data-sno="'+item.seq +'"value="삭제" /></td>';
 		data += '</tr>';
 	});
 	// Code Here
 	$('#reviewDiv').html(data);
+	$('.udpbtn').on('click', udt);
 	$('.delbtn').on('click', del);
 }
 
@@ -118,6 +120,46 @@ function del() {
 			}else{
 				alert('삭제에 실패했습니다. 관리자에게 문의하세요');
 			}
+		}
+	});
+}
+
+function udt(){
+	var udtno = $(this).attr('data-sno');
+	var name = $('tr[data-sno="' + udtno + '"] .name').html();
+	var review = $('tr[data-sno="' + udtno + '"] .review').html();
+
+	$('#name').val(name);
+	$('#review').val(review);
+	$('#name').focus();
+	$('#regist').val('수정');
+	$('#regist').on('click', update);
+}
+
+function update(){
+	var name = $('#name').val();
+	var review = $('#review').val();
+	
+	var updateData = {
+		"name" : name,
+		"review" : review
+	}
+	
+	$.ajax({
+		url: 'update',
+		data: updateData,
+		type: 'get',
+		success: function(result){
+			if(result != 0){
+				$('#data').val('');
+				$('#review').val('');
+				$('#regist').val('추가');
+				$('#regist').on('click', regist);
+				init();
+			}else{
+				alert('수정에 실패했습니다! 관리자 문의!');
+			}
+			
 		}
 	});
 }
